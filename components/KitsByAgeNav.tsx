@@ -1,4 +1,11 @@
 import Heading from "./styles.tsx"
+import {
+  AGE_LINK_STYLES,
+  AGE_LINK_GRAPHIC_CIRCLE_STYLES,
+  AGE_LINK_ICON_IMAGE_STYLES,
+  AGE_LINK_AGE_RANGE_STYLES,
+  GRID_STYLES,
+} from "@/utils/constants.ts";
 
 interface AgeLinkProps {
   ageRange: string;
@@ -8,60 +15,45 @@ interface AgeLinkProps {
 }
 
 function AgeLink({ ageRange, href, iconSrc, altText }: AgeLinkProps) {
-    return (
-      <a
-        className="age-link"
-        href={href}
+  return (
+    <a className="age-link" href={href} style={{ display: "inline-block", margin: "0 2rem" }}>
+      <div
+        className="age-link__graphic-circle"
         style={{
-          display: "inline-block",
-          margin: "0 2rem",
-          // Add media queries for mobile devices
-          "@media (max-width: 640px)": {
-            margin: "1rem",
-          },
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "space-between",
+          position: "relative",
+          borderRadius: "50%",
+          backgroundColor: "rgba(128, 0, 128, 0.2)", // Purple with 20% opacity
+          width: "138px",
+          height: "138px",
+          padding: "20px 0",
         }}
       >
-        <li
-          className="age-link__list-item"
+        <img
+          src={iconSrc}
+          width="80"
+          alt={altText}
+          className="age-link__icon-image"
+        />
+        <p
+          className="type type--color-default type-body type-body-l type--space-under-small type--lh-small type--align-center type--block type--sentence"
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            position: "relative",
+            color: "#4f06be",
+            fontWeight: "bold",
           }}
         >
-          <div
-            className="age-link__graphic-circle"
-            style={{
-              position: "absolute",
-              borderRadius: "50%",
-              backgroundColor: "rgba(128, 0, 128, 0.2)", // Purple with 20% opacity
-              width: "110px",
-              height: "110px",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              zIndex: -1,
-            }}
-          ></div>
-          <img
-            src={iconSrc}
-            width="80"
-            alt={altText}
-            className="age-link__icon-image"
-          />
-          <p
-            className="type type--color-default type-body type-body-l type--space-under-small type--lh-small type--align-center type--block type--sentence"
-            style={{ color: "rgb(74, 144, 226)", fontWeight: "bold", zIndex: 1 }}
-          >
-            {ageRange}
-          </p>
-        </li>
-      </a>
-    );
-  }
-  
-  
+          {ageRange}
+        </p>
+      </div>
+    </a>
+  );
+}
+
+
+
 
 export default function KitsByAgeNav() {
   const ageLinksData: AgeLinkProps[] = [
@@ -92,29 +84,12 @@ export default function KitsByAgeNav() {
   ];
 
   return (
-    <section
-      id="store-age-navigation"
-      className="section section--default section--align-center section--padding-store-compact section--space-under-none"
-    >
-      <Heading
-        title="Serious fun and learning for all ages."
-        subtitle="With love."
-      /> 
+    <section id="store-age-navigation">
+      <Heading title="Serious fun & learning for all ages" />
       <div className="age-links-list">
-      <ul
-          className="grid grid--gap-default space-under--none grid--columns-5"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            // Add media queries for mobile devices
-            "@media (max-width: 640px)": {
-              flexDirection: "column",
-              alignItems: "center",
-            },
-          }}
-        >
+        <ul className="grid" style={{ display: "flex", justifyContent: "center", listStyle: "none", padding: "0" }}>
           {ageLinksData.map((ageLink) => (
-            <AgeLink key={ageLink.ageRange} {...ageLink} />
+            <li key={ageLink.ageRange} style={{ margin: "0 2rem" }}><AgeLink {...ageLink} /></li>
           ))}
         </ul>
       </div>
