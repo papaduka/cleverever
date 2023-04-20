@@ -12,7 +12,14 @@ function AgeLink({ ageRange, href, iconSrc, altText }: AgeLinkProps) {
       <a
         className="age-link"
         href={href}
-        style={{ display: "inline-block", margin: "0 2rem" }}
+        style={{
+          display: "inline-block",
+          margin: "0 2rem",
+          // Add media queries for mobile devices
+          "@media (max-width: 640px)": {
+            margin: "1rem",
+          },
+        }}
       >
         <li
           className="age-link__list-item"
@@ -94,9 +101,17 @@ export default function KitsByAgeNav() {
         subtitle="With love."
       /> 
       <div className="age-links-list">
-        <ul
+      <ul
           className="grid grid--gap-default space-under--none grid--columns-5"
-          style={{ display: "flex", justifyContent: "center" }}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            // Add media queries for mobile devices
+            "@media (max-width: 640px)": {
+              flexDirection: "column",
+              alignItems: "center",
+            },
+          }}
         >
           {ageLinksData.map((ageLink) => (
             <AgeLink key={ageLink.ageRange} {...ageLink} />
